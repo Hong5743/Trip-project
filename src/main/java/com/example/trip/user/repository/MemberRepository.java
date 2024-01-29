@@ -10,5 +10,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     //Member findByMember_idAndMember_passwd(String member_id, String member_passwd);//로그인 유효성검사
 
     Member findByMemberId(String memberId);
+    boolean existsByMemberId(String memberId);//중복 아이디 검색
 }
 

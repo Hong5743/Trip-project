@@ -15,14 +15,6 @@ public class MemberController {
         return "user/loginForm";
     }
 
-//    @PostMapping("/loginProc")
-//    public String loginP(Model model,HttpSession session){
-//        MemberSessionDto sessionDto = (MemberSessionDto) session.getAttribute("session");
-//        if (sessionDto != null) {
-//            model.addAttribute("session", sessionDto.getMemberNickname());
-//        }
-//      return "/";
-//    }
 
     @GetMapping("/join")
     public String joinUser() {
