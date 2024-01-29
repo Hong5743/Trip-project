@@ -29,6 +29,9 @@ public class MemberService implements UserDetailsService {
         dto.setMemberPasswd(encoder.encode(dto.getMemberPasswd()));
         memberRepository.save(dto.toEntity());
     }
+    public boolean checkMemberId(String memberId){
+        return memberRepository.existsByMemberId(memberId);
+    }
     //username 이 DB에 있는지 확인
     @Override
     public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {

@@ -1,6 +1,7 @@
 package com.example.trip.user.dto;
 
 import lombok.*;
+import org.springframework.http.HttpStatus;
 
 @Getter
 @Setter
@@ -10,4 +11,5 @@ import lombok.*;
 public class ResponseDto<T> {
     int status;
     T data;
+
 }

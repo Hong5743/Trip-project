@@ -1,7 +1,36 @@
 $(document).ready(function () {
+    let isIdChecked = false; // 아이디 중복 확인 여부를 저장할 변수
+    //ID 중복 확인
+    //id를 입력할 수 있는 input text 영역을 벗어나면 동작한다.
+    $("#checkId").click(function(e) {
+        e.preventDefault();
+
+        var user_id = $("#user_id").val();
+
+        //Ajax로 전송
+        $.ajax({
+            url : '/api/ConfirmId',
+            data : {
+                memberId : user_id
+            },
+            type : 'POST',
+            dataType : 'json',
+            success : function(result) {
+                if (result === true) {
+                    $("#label1").css("color", "black").text("사용 가능한 ID 입니다.");
+                    isIdChecked = true; // 아이디 중복 확인 완료 상태로 설정
+                } else{
+                    $("#label1").css("color", "red").text("사용 불가능한 ID 입니다.");
+                    $("#id").val('');
+                    isIdChecked = false; // 아이디 중복 확인 실패 상태로 설정
+                }
+            }
+        }); //End Ajax
+    });
 
     $('#submit-signup').click(function (e) {
         e.preventDefault(); // 기본 폼 제출 동작을 막습니다.
+
         //빈칸 오류를 위한 변수 선언
         let userId = $("#user_id").val();
         let userPasswd = $("#user_passwd").val();
@@ -62,6 +91,12 @@ $(document).ready(function () {
             check = true;
         } else {
             $('#textError7').text('');
+        }
+
+        if (!isIdChecked && !check) {
+            // 아이디 중복 확인 버튼을 누르지 않은 경우
+            alert('아이디 중복 확인을 먼저 진행해주세요.');
+            return;
         }
 
         if (!check) {
